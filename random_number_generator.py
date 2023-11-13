@@ -46,6 +46,16 @@ def random_exponential_distributed_intervals(t0,N):
 def random_exponential_interval(t0):
     return -t0*np.log(1-np.random.rand())
 
+def experiment_mu(mu):
+    N = -1 # t = 0 is not a measurement
+    while mu > 0:
+        N += 1
+        mu -= random_exponential_interval(1)
+    return N
+
+def random_poisson(mu,N):
+    return np.array([experiment_mu(mu) for _ in range(N)])
+
 if __name__ == '__main__':
     X = np.linspace(0,10,100)
     fix = expon(5)
