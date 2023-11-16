@@ -1,9 +1,2 @@
 *.__pychache__
-complex.txt
-complex.bin
-mendelbrot.*
-mendelbrot_compiler
-mendelbrot2.py
-mendelbrot3.py
-mendelbrot4.py
-mendelbrot3.ipynb
+fractals/
