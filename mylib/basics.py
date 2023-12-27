@@ -45,3 +45,25 @@ def std_dev(a):
 
 def std_dev_mean(a):
     return std_dev(a)/np.sqrt(len(a))
+
+# best number of bins depending on the number of data:
+def sturges (N_events) :
+     return int( np.ceil( 1 + 3.322 * np.log(N_events) ) )
+
+def data_reader_plotter(filename):
+    import matplotlib.pyplot as plt
+    data = np.loadtxt(filename,dtype=np.float64)
+    bins = np.linspace(min(data),max(data),sturges(len(data)))
+    plt.hist(data,bins = bins, color='springgreen',edgecolor='black')
+
+    parameters = {
+        'mean':data.mean(),
+        'std':np.std(data),
+        'var':np.std(data)**2,
+        'std_mean':data.mean()/np.sqrt(len(data))
+    }
+
+    plt.show()
+    print(parameters)
+
+    return parameters
