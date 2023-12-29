@@ -16,7 +16,7 @@ class RandomLCG:
     self.x = seed
 
 def rand_uniform(min,max,size=1):
-    if size==1: return np.random.rand()*(max-min) + min
+    if size==1: return np.float64(np.random.rand()*(max-min) + min)
     return np.random.rand(size)*(max-min) + min
 
 def rand_TAC(pdf,xmin,xmax,size=1):
@@ -27,3 +27,24 @@ def rand_TAC(pdf,xmin,xmax,size=1):
             randX = rand_uniform(xmin,xmax,size=1)
         l[i] = randX
     return l[0] if size == 1 else l
+
+# using inverse CDF
+def rand_expon(t0,size=1):
+  return -t0*np.log(1-rand_uniform(0,1,size=size))
+
+# random poisson distribution using toy esperiment
+def rand_poisson(mu, size = 1):
+    def toy(mu): #t0 = 1, tM = mu
+        N = -1
+        while mu>0:
+            N += 1
+            mu -= rand_expon(1)
+        return N
+    if size==1: return toy(mu)
+    else: return np.array([toy(mu) for _ in range(size)])
+
+def poisson_stats(X):
+    return {'mean':np.mean(X),'var':np.var(X),'skew':sc.stats.skew(X),'kurt':sc.stats.kurtosis(X)}
+
+def poisson_expected_stats(mu):
+    return {'mean':mu,'var':mu,'skew':1/np.sqrt(mu),'kurt':1/mu}
