@@ -1,4 +1,5 @@
 import numpy as np
+import scipy as sc
 
 class RandomLCG:
   def __init__(self,A,C,M,seed=0):
@@ -46,5 +47,16 @@ def rand_poisson(mu, size = 1):
 def poisson_stats(X):
     return {'mean':np.mean(X),'var':np.var(X),'skew':sc.stats.skew(X),'kurt':sc.stats.kurtosis(X)}
 
+class Stats:
+    def __init__(self,X):
+        self.mean = np.mean(X)
+        self.var = np.var(X)
+        self.std = np.std(X)
+        self.skew = sc.stats.skew(X)
+        self.kurt = sc.stats.kurtosis(X)
+
 def poisson_expected_stats(mu):
     return {'mean':mu,'var':mu,'skew':1/np.sqrt(mu),'kurt':1/mu}
+
+if __name__ == '__main__':
+   Stats([1,2,3,4,5,6])
