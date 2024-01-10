@@ -44,6 +44,10 @@ def rand_poisson(mu, size = 1):
     if size==1: return toy(mu)
     else: return np.array([toy(mu) for _ in range(size)])
 
+def expon_random(tau,N):
+    if tau == 0: return np.zeros(N)
+    return -tau*np.log(1-np.random.rand(N))
+
 def poisson_stats(X):
     return {'mean':np.mean(X),'var':np.var(X),'skew':sc.stats.skew(X),'kurt':sc.stats.kurtosis(X)}
 
