@@ -23,5 +23,8 @@ def maximum(f,a,x1,x2,b,prec = 0.0001):
     if f(x1) > f(x2): return maximum(f,a,a+(1-0.618)*(x2-a),x1,x2,prec)
     else: return maximum(f,x1,x2,x1+0.618*(b-x1),b,prec)
 
+def bisection_for_likelihood(h,a,xmax,b,prec: float=0.0001):
+    return zero(h,a,xmax,prec),zero(h,xmax,b,prec)
+
 if __name__ == '__main__':
     print(maximum(lambda x: -(x-1)**2,-1,-1+(1-0.618)*3,-1+0.618*3,2))
