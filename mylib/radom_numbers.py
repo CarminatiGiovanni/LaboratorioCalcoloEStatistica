@@ -20,11 +20,21 @@ def rand_uniform(min,max,size=1):
     if size==1: return np.float64(np.random.rand()*(max-min) + min)
     return np.random.rand(size)*(max-min) + min
 
-def rand_TAC(pdf,xmin,xmax,size=1):
+# def rand_TAC(pdf,xmin,xmax,size=1):
+#     l = np.empty(size,dtype=np.float64)
+#     for i in range(size):
+#         randX = rand_uniform(xmin,xmax,size=1)
+#         while pdf(randX) < rand_uniform(0,1,size=1):
+#             randX = rand_uniform(xmin,xmax,size=1)
+#         l[i] = randX
+#     return l[0] if size == 1 else l
+
+############ ANOTHER
+def rand_TAC(pdf,xmin,xmax,ymax,size=1):
     l = np.empty(size,dtype=np.float64)
     for i in range(size):
         randX = rand_uniform(xmin,xmax,size=1)
-        while pdf(randX) < rand_uniform(0,1,size=1):
+        while pdf(randX) < rand_uniform(0,ymax,size=1):
             randX = rand_uniform(xmin,xmax,size=1)
         l[i] = randX
     return l[0] if size == 1 else l
