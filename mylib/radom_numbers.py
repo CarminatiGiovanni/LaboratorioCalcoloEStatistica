@@ -1,5 +1,5 @@
 import numpy as np
-import scipy as sc
+import scipy.stats as sc
 
 class RandomLCG:
   def __init__(self,A,C,M,seed=0):
@@ -66,11 +66,20 @@ class Stats:
         self.mean = np.mean(X)
         self.var = np.var(X)
         self.std = np.std(X)
-        self.skew = sc.stats.skew(X)
-        self.kurt = sc.stats.kurtosis(X)
+        self.skew = sc.skew(X)
+        self.kurt = sc.kurtosis(X)
+    def __str__(self):
+       return f' \
+       mean: {self.mean}\n \
+       var : {self.var}\n \
+       skew: {self.skew}\n \
+       kurt: {self.kurt}\n \
+       std : {self.std}\n \
+       '
 
 def poisson_expected_stats(mu):
     return {'mean':mu,'var':mu,'skew':1/np.sqrt(mu),'kurt':1/mu}
 
 if __name__ == '__main__':
-   Stats([1,2,3,4,5,6])
+   s = Stats([1,2,3,4,5,6])
+   print(s)
