@@ -23,6 +23,14 @@ def maximum(f,a,x1,x2,b,prec = 0.0001):
     if f(x1) > f(x2): return maximum(f,a,a+(1-0.618)*(x2-a),x1,x2,prec)
     else: return maximum(f,x1,x2,x1+0.618*(b-x1),b,prec)
 
+
+def maximumr(f,a,b,prec = 0.0001):
+    x1 = a+(1-0.618) * (b-a)
+    x2 = a + 0.618 * (b-a)
+    if np.abs(b - a) < prec: return x2
+    if f(x1) > f(x2): return maximum(f,a,x2,prec)
+    else: return maximum(f,x1,b,prec)
+
 def bisection_for_likelihood(h,a,xmax,b,prec: float=0.0001):
     return zero(h,a,xmax,prec),zero(h,xmax,b,prec)
 
