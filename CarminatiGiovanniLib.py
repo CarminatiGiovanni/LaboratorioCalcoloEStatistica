@@ -121,7 +121,7 @@ def likelyhood(f,X,tau):
 def extended_binned_NNL_example():
 
 	def parabola(x,a,b,c):
-	    return a*x**2 + b*x + c
+		return a*x**2 + b*x + c
 
 	area_para = crude_montecarlo(lambda x: -0.2*x**2+0.8*x+1,-1,5)[0]
 	area_gauss = crude_montecarlo(lambda x: 2*sc.norm.pdf(x,loc=2,scale=0.25),-1,5)[0]
@@ -232,7 +232,8 @@ def binned_unbinned_NNL_example():
 	unbinned_minuit = Minuit (my_cost_func_unb, mu = np.mean(gauss_data), sigma = np.std(gauss_data))
 	unbinned_minuit.migrad()
 	print(unbinned_minuit)
-	
+
+'''
 def example_leasts_square_not_testable():
 
 	# h è la pdf
@@ -252,9 +253,10 @@ def example_leasts_square_not_testable():
 
 	for par, val, err in zip (my_minuit.parameters, my_minuit.values, my_minuit.errors) :
 		print(f'{par} = {val:.3f} +/- {err:.3f}') # formatted output
+'''	
 
 if __name__ == '__main__':
-	# print(sturges(1000))
+	print(sturges(1000))
 	
 	# f = lambda x: np.sin(x)
 	
@@ -270,7 +272,7 @@ if __name__ == '__main__':
 	# plt.scatter(rand_uniform(0,1,100),rand_uniform(0,1,100),marker='.',color='red')
  	# plt.show()
  	
- 	'''
+'''
  	pdf_cauchy = lambda x,M,G: 1/np.pi * G / ((x-M)**2 + G**2)
  	fig, ax = plt.subplots(nrows = 1,ncols = 3)
  	ax[0].hist(rand_expon(1/5,1000),bins=sturges(1000),edgecolor='black',color='gold',density=True)
